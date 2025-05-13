@@ -2,9 +2,9 @@
 #include <cstring>
 #include <cstdlib>
 #include <fstream>
-#include "./account/Account.h"
-#include "./employee/Employee.h"
-#include "./filemanagment/File_M.h"
+#include "../account/Account.h"
+#include "../employee/Employee.h"
+#include "../filemanagment/File_M.h"
 using namespace std;
 void delay(int);
 void home_page();

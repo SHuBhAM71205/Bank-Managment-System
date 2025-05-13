@@ -4,8 +4,9 @@
 #include <string>
 #include <cstdlib>
 #include <windows.h>
-#include "./account/Account.h"
-#include "./filemanagment/File_M.h"
+#include "../account/Account.h"
+#include "../filemanagment/File_M.h"
+
 using namespace std;
 
 

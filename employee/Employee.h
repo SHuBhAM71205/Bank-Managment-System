@@ -7,8 +7,8 @@
 #include <string>
 #include <cstdio>
 #include <string>
-#include "./filemanagment/File_M.h"
-#include "./account/Account.h"
+#include "../filemanagment/File_M.h"
+#include "../account/Account.h"
 using namespace std;
 
 typedef enum position
