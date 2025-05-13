@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.C": "c",
+			"typeinfo": "cpp",
+			"chrono": "cpp",
+			"iosfwd": "cpp",
+			"fstream": "cpp"
+		}
+	}
+}
