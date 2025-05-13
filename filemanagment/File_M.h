@@ -137,7 +137,7 @@ bool create_obj_in_file(const string &filename, T4 &s)
 template<typename T5>
 bool deleteObject(const string& filename, int idToDelete,T5 & obj) {
     ifstream i(filename, ios::binary);
-    ofstream o("FILES\\Buffer_file.bin",ios::binary);
+    ofstream o("..\\FILES\\Buffer_file.bin",ios::binary);
 
     if (!i || !o) {
         FileException(filename);
@@ -154,7 +154,7 @@ bool deleteObject(const string& filename, int idToDelete,T5 & obj) {
     o.close();
 
     std::remove(filename.c_str());
-    std::rename("FILES\\Buffer_file.bin", filename.c_str());
+    std::rename("..\\FILES\\Buffer_file.bin", filename.c_str());
 
     cout << "Object with ID " << idToDelete << " deleted." << std::endl;
     return  true;
@@ -183,7 +183,7 @@ inline void update_no_of_acc(string filename,int n)
 // template<typename T5>
 // bool updateObject(const std::string &filename, int idToUpdate, const T5 &newData) {
 //     std::ifstream i(filename, std::ios::binary);
-//     std::ofstream o("FILES\\Buffer_file1.bin", std::ios::binary);
+//     std::ofstream o("..\\FILES\\Buffer_file1.bin", std::ios::binary);
 
 //     if (!i || !o) {
 //         FileException(filename); // Handle the exception case as needed
@@ -209,7 +209,7 @@ inline void update_no_of_acc(string filename,int n)
 
 //     // Step 3: Replace the original file with the updated file
 //     std::remove(filename.c_str());
-//     std::rename("FILES\\Buffer_file1.bin", filename.c_str());
+//     std::rename("..\\FILES\\Buffer_file1.bin", filename.c_str());
 
 //     if (!objectFound) {
 //         std::cerr << "Object with ID " << idToUpdate << " not found." << std::endl;

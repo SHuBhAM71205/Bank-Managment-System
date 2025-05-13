@@ -6,11 +6,11 @@ using std::endl;
 
 Employee::Employee(double salery, position p)
 {
-    x= return_no_of_acc_present("FILES\\no_of_employee.txt");
+    x= return_no_of_acc_present("..\\FILES\\no_of_employee.txt");
     this->p = p;
     this->salery = salery;
     employee_id = ++x;
-    update_no_of_acc("FILES\\no_of_employee.txt",x);
+    update_no_of_acc("..\\FILES\\no_of_employee.txt",x);
     strcpy(joined_at, getCurrentTimestamp().c_str());
     cout<<endl<<endl<<"Ypur id number is:"<<" "<<employee_id<<endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -24,7 +24,7 @@ Employee::Employee()
 //----------------------------------------------------------------------
 Loan_officer::Loan_officer(double s) : Employee(s, loan_officer)
 {
-    create_obj_in_file<Loan_officer>("FILES\\Loan_officer.bin",*this);
+    create_obj_in_file<Loan_officer>("..\\FILES\\Loan_officer.bin",*this);
 }
 
 Loan_officer::Loan_officer()
@@ -35,7 +35,7 @@ Loan_officer::Loan_officer()
 void Loan_officer::provide_loan(int acc_no, double amt)
 {
     Saving s;
-    if (search_obj<Saving>("FILES\\Saving.bin",acc_no,s))
+    if (search_obj<Saving>("..\\FILES\\Saving.bin",acc_no,s))
     {
         if(s.return_status())
         {
@@ -54,12 +54,12 @@ void Loan_officer::provide_loan(int acc_no, double amt)
 
 bool Loan_officer::save()
 {
-    save_to_bin<Loan_officer>("FILES\\Loan_officer.bin", *this, employee_id);
+    save_to_bin<Loan_officer>("..\\FILES\\Loan_officer.bin", *this, employee_id);
 }
 
 bool Loan_officer::load(int emp_no)
 {
-    load_from_bin<Loan_officer>("FILES\\Loan_officer.bin", *this, emp_no);
+    load_from_bin<Loan_officer>("..\\FILES\\Loan_officer.bin", *this, emp_no);
 }
 
 bool Loan_officer::check_psw(string psw)
@@ -73,7 +73,7 @@ bool Loan_officer::check_id(int i)
 //----------------------------------------------------------------------
 Branch_manager::Branch_manager(double s) : Employee(s, branch_manager)
 {
-    create_obj_in_file<Branch_manager>("FILES\\Branch_manager.bin",*this);
+    create_obj_in_file<Branch_manager>("..\\FILES\\Branch_manager.bin",*this);
 }
 
 Branch_manager::Branch_manager() 
@@ -105,15 +105,15 @@ void Bank_representative::block_account(int id)
     Account a;
     Saving sa;
     Fix_deposit_account f;
-    if(load_from_bin<Saving>("FILES\\Saving.bin",sa,id))
+    if(load_from_bin<Saving>("..\\FILES\\Saving.bin",sa,id))
     {
         sa.update_status(Block);
-        save_to_bin<Saving>("FILES\\Saving.bin",sa,id);
+        save_to_bin<Saving>("..\\FILES\\Saving.bin",sa,id);
     }
-    else if(load_from_bin<Fix_deposit_account>("FILES\\Fix_deposit_account.bin",f,id))
+    else if(load_from_bin<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin",f,id))
     {
         f.update_status(Block);
-        save_to_bin<Fix_deposit_account>("FILES\\Fix_deposit_account.bin",f,id);
+        save_to_bin<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin",f,id);
     }
     else
     {
@@ -127,17 +127,17 @@ void Branch_manager::fire_employee(int id)
     Loan_officer lo;
     Bank_representative br;
     Branch_manager m;
-    if(load_from_bin<Loan_officer>("FILES\\Loan_officer.bin",lo,id))
+    if(load_from_bin<Loan_officer>("..\\FILES\\Loan_officer.bin",lo,id))
     {
-        deleteObject<Loan_officer>("FILES\\Loan_officer.bin",id,lo);
+        deleteObject<Loan_officer>("..\\FILES\\Loan_officer.bin",id,lo);
     }
-    else  if(load_from_bin<Bank_representative>("FILES\\Bank_representative.bin",br,id))
+    else  if(load_from_bin<Bank_representative>("..\\FILES\\Bank_representative.bin",br,id))
     {
-        deleteObject<Bank_representative>("FILES\\Bank_representative.bin",id,br);
+        deleteObject<Bank_representative>("..\\FILES\\Bank_representative.bin",id,br);
     }
-    else if(load_from_bin<Branch_manager>("FILES\\Branch_manager.bin",m,id))
+    else if(load_from_bin<Branch_manager>("..\\FILES\\Branch_manager.bin",m,id))
     {
-        deleteObject<Branch_manager>("FILES\\Branch_manager.bin",id,m);
+        deleteObject<Branch_manager>("..\\FILES\\Branch_manager.bin",id,m);
     }
     else
     {
@@ -151,11 +151,11 @@ void Bank_representative::remove_account(int id)
     Account a;
     Saving sa;
     Fix_deposit_account f;
-    if(load_from_bin<Saving>("FILES\\Saving.bin",sa,id))
+    if(load_from_bin<Saving>("..\\FILES\\Saving.bin",sa,id))
     {
         sa.delete_acc();
     }
-    else  if(load_from_bin<Fix_deposit_account>("FILES\\Fix_deposit_account.bin",f,id))
+    else  if(load_from_bin<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin",f,id))
     {
         f.delete_acc();
     }
@@ -167,7 +167,7 @@ void Bank_representative::remove_account(int id)
 
 void Branch_manager::show_all_trnsaction()
 {
-    ifstream i("FILES\\TRANSCTION.txt");
+    ifstream i("..\\FILES\\TRANSCTION.txt");
     string s1;
     if(i.is_open())
     {
@@ -181,19 +181,19 @@ void Branch_manager::show_all_trnsaction()
     }
     else
     {
-        FileException("FILES\\TRANSCTION.txt");
+        FileException("..\\FILES\\TRANSCTION.txt");
     }
     
 }
 
 bool Branch_manager::save()
 {
-    save_to_bin<Branch_manager>("FILES\\Branch_manager.bin", *this, employee_id);
+    save_to_bin<Branch_manager>("..\\FILES\\Branch_manager.bin", *this, employee_id);
 }
 
 bool Branch_manager::load(int emp_no)
 {
-    load_from_bin<Branch_manager>("FILES\\Branch_manager.bin", *this, emp_no);
+    load_from_bin<Branch_manager>("..\\FILES\\Branch_manager.bin", *this, emp_no);
 }
 
 bool Branch_manager::check_psw(string psw)
@@ -207,7 +207,7 @@ bool Branch_manager::check_id(int i)
 //----------------------------------------------------------------------
 Bank_representative::Bank_representative(double s) : Employee(s, bank_representative)
 {
-    create_obj_in_file<Bank_representative>("FILES\\Bank_representative.bin",*this);
+    create_obj_in_file<Bank_representative>("..\\FILES\\Bank_representative.bin",*this);
 }
 
 Bank_representative::Bank_representative() 
@@ -250,12 +250,12 @@ void Bank_representative::create_account()
 
 bool Bank_representative::save()
 {
-    save_to_bin<Bank_representative>("FILES\\Bank_representative.bin", *this, employee_id);
+    save_to_bin<Bank_representative>("..\\FILES\\Bank_representative.bin", *this, employee_id);
 }
 
 bool Bank_representative::load(int emp_no)
 {
-    load_from_bin<Bank_representative>("FILES\\Bank_representative.bin", *this, emp_no);
+    load_from_bin<Bank_representative>("..\\FILES\\Bank_representative.bin", *this, emp_no);
 }
 
 bool Bank_representative::check_psw(string psw)

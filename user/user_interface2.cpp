@@ -4,9 +4,8 @@
 #include <string>
 #include <cstdlib>
 #include <windows.h>
-#include "Account.h"
-#include "File_M.h"
-
+#include "./account/Account.h"
+#include "./filemanagment/File_M.h"
 using namespace std;
 
 
@@ -110,13 +109,13 @@ void authentication(int role)
     {
     case 1:
         system("cls");
-        filename = "FILES/Saving.bin";
+        filename = "..\\FILES\\Saving.bin";
         authentication2<Saving>(s, filename, role);
         break;
     case 2:
         system("cls");
 
-        filename = "FILES\\Fix_deposit_account.bin";
+        filename = "..\\FILES\\Fix_deposit_account.bin";
         authentication2<Fix_deposit_account>(fd, filename, role);
         break;
     default:
@@ -179,9 +178,9 @@ void Saving_account_interface(int id)
 {
     Saving s1;
     s1.load(id);
-    if(search_obj("FILES\\Saving.bin",id,s1)!=-1)
+    if(search_obj("..\\FILES\\Saving.bin",id,s1)!=-1)
     {
-        load_from_bin("FILES\\Saving.bin",s1,id);
+        load_from_bin("..\\FILES\\Saving.bin",s1,id);
     }
     else{
         cout<<"error"<<endl;
