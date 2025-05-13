@@ -1,5 +1,6 @@
 #include "Account.h"
 #include <cstring>
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -13,11 +14,11 @@ Account::Account(type t, double bal = 0)
     tp = t;
     balance=bal;
     created_at = getCurrentTimestamp();
-    x=return_no_of_acc_present("FILES\\no_of_account.txt");
+    x=return_no_of_acc_present("..\\FILES\\no_of_account.txt");
     account_no = ++x;
     cout<<account_no;
-    update_no_of_acc("FILES\\no_of_account.txt",x);
-    string s="FILES\\passbook\\" +to_string(account_no) + "p.txt";
+    update_no_of_acc("..\\FILES\\no_of_account.txt",x);
+    string s="..\\FILES\\passbook\\" +to_string(account_no) + "p.txt";
     cout<<"passbook created"<<endl;
     ofstream o(s);
     o.close();
@@ -42,7 +43,7 @@ Saving::Saving(double bal) : Account(saving)
     s=Active;
     payment_limit = 10000;
     generate_pass_book();
-    create_obj_in_file<Saving>("FILES\\Saving.bin", *this);
+    create_obj_in_file<Saving>("..\\FILES\\Saving.bin", *this);
 }
 
 Saving::Saving() : Account()
@@ -111,7 +112,7 @@ double Saving::check_bal()
 
 void Saving::generate_pass_book()
 {
-    string file_name = "FILES\\passbook\\"+to_string(account_no) + "p.txt";
+    string file_name = "..\\FILES\\passbook\\"+to_string(account_no) + "p.txt";
     ofstream o;
     o.open(file_name, ios::app);
     o << "ACCOUNT NUMBER: " << account_no << "\n\n\n";
@@ -131,14 +132,14 @@ void Saving::generate_pass_book()
 
 bool Saving::save()
 {
-    return save_to_bin<Saving>("FILES\\Saving.bin", *this, account_no);
+    return save_to_bin<Saving>("..\\FILES\\Saving.bin", *this, account_no);
 
-    // updateObject<Saving>("FILES\\Saving.bin",account_no,*this);
+    // updateObject<Saving>("..\\FILES\\Saving.bin",account_no,*this);
 }
 
 bool Saving::load(int acc_no)
 {
-    return load_from_bin<Saving>("FILES\\Saving.bin", *this, acc_no);
+    return load_from_bin<Saving>("..\\FILES\\Saving.bin", *this, acc_no);
 }
 
 bool Saving::return_status()
@@ -152,7 +153,7 @@ bool Saving::return_status()
 
 bool Saving::delete_acc()
 {
-    return deleteObject<Saving>("FILES\\Saving.bin", account_no, *this);
+    return deleteObject<Saving>("..\\FILES\\Saving.bin", account_no, *this);
 }
 
 bool Saving::check_psw(const string psw)
@@ -174,7 +175,7 @@ void  Saving::update_status(status s1)
 Fix_deposit_account::Fix_deposit_account(float mp, float ir, double fa) : Account(fix_deposit), maturation_period(mp), intrest_rate(ir), fix_amount(fa)
 {
     s=Active;
-    create_obj_in_file<Fix_deposit_account>("FILES\\Fix_deposit_account.bin", *this);
+    create_obj_in_file<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin", *this);
     generate_pass_book();
 }
 
@@ -221,7 +222,7 @@ bool Fix_deposit_account::broke_fd()
 
 void Fix_deposit_account::generate_pass_book()
 {
-    string file_name = "FILES\\passbook\\"+to_string(account_no) + "p.txt";
+    string file_name = "..\\FILES\\passbook\\"+to_string(account_no) + "p.txt";
     ofstream o;
     o.open(file_name, ios::app);
     o << "ACCOUNT NUMBER: " << account_no << "\n\n\n";
@@ -241,12 +242,12 @@ void Fix_deposit_account::generate_pass_book()
 
 bool Fix_deposit_account::save()
 {
-    return save_to_bin<Fix_deposit_account>("FILES\\Fix_deposit_account.bin", *this, account_no);
+    return save_to_bin<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin", *this, account_no);
 }
 
 bool Fix_deposit_account::load(int acc_no)
 {
-    return load_from_bin<Fix_deposit_account>("FILES\\Fix_deposit_account.bin", *this, acc_no);
+    return load_from_bin<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin", *this, acc_no);
 }
 
 bool Fix_deposit_account::return_status()
@@ -265,7 +266,7 @@ double Fix_deposit_account::check_bal()
 
 void  Fix_deposit_account::show_trans()
 {
-    string file_name = "FILES\\passbook\\"+to_string(account_no) + "p.txt";
+    string file_name = "..\\FILES\\passbook\\"+to_string(account_no) + "p.txt";
     ifstream i;
     i.open(file_name, ios::in);
     char c;
@@ -279,7 +280,7 @@ void  Fix_deposit_account::show_trans()
 
 void  Saving::show_trans()
 {
-    string file_name = "FILES\\passbook\\"+to_string(account_no) + "p.txt";
+    string file_name = "..\\FILES\\passbook\\"+to_string(account_no) + "p.txt";
     ifstream i;
     i.open(file_name, ios::in);
     char c;
@@ -293,7 +294,7 @@ void  Saving::show_trans()
 
 bool Fix_deposit_account::delete_acc()
 {
-    return deleteObject<Fix_deposit_account>("FILES\\Fix_deposit_account.bin", account_no, *this);
+    return deleteObject<Fix_deposit_account>("..\\FILES\\Fix_deposit_account.bin", account_no, *this);
 }
 
 bool Fix_deposit_account::check_psw(const string psw)
@@ -394,7 +395,7 @@ void userdata1(user_data & e)
 }
 bool update_to_trnsaction(double amt)
 {
-     ofstream o("FILES\\TRANSACTIONS.txt", ios::app);
+     ofstream o("..\\FILES\\TRANSACTIONS.txt", ios::app);
     if (!o) return false;  // Check if file opened successfully
     
     o << "Transaction amount: " << amt << " on " << getCurrentTimestamp() << endl;
@@ -417,7 +418,7 @@ int Saving::get_acc_no()
 
 void Saving::update_passbook(double amt)
 {
-    string file_name ="FILES\\passbook\\" +to_string(account_no) + "p.txt";
+    string file_name ="..\\FILES\\passbook\\" +to_string(account_no) + "p.txt";
     ofstream o;
     o.open(file_name, ios::app);
     o << "\nDATE::\t\t\t\t" << getCurrentTimestamp() << endl;
@@ -437,7 +438,7 @@ void Saving::update_passbook(double amt)
 
 void Fix_deposit_account::update_passbook(double amt)
 {
-    string file_name ="FILES\\passbook\\" +to_string(account_no) + "p.txt";
+    string file_name ="..\\FILES\\passbook\\" +to_string(account_no) + "p.txt";
     ofstream o;
     o.open(file_name, ios::app);
     o << "\n\tDATE::\t\t\t\t" << getCurrentTimestamp() << endl;

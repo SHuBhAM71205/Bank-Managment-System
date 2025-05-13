@@ -2,9 +2,9 @@
 #include <cstring>
 #include <cstdlib>
 #include <fstream>
-#include "Account.h"
-#include "Employee.h"
-#include "File_M.h"
+#include "./account/Account.h"
+#include "./employee/Employee.h"
+#include "./filemanagment/File_M.h"
 using namespace std;
 void delay(int);
 void home_page();
@@ -124,19 +124,19 @@ void authentication(int role) {
     switch (role) {
         case 1:
             system("cls");
-            filename = "FILES/Branch_manager.bin";
+            filename = "..\\FILES/Branch_manager.bin";
             authentication2<Branch_manager>(m, filename, role);
             break;
         case 2:
             system("cls");
 
-            filename = "FILES/Loan_officer.bin";
+            filename = "..\\FILES/Loan_officer.bin";
             authentication2<Loan_officer>(lo, filename, role);
             break;
         case 3:
             system("cls");
 
-            filename = "FILES/Bank_representative.bin";
+            filename = "..\\FILES/Bank_representative.bin";
             authentication2<Bank_representative>(br, filename, role);
             break;
         default:
